@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="../static/base-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+    />
+  </head>
+  <body>
+    <nav class="nav-info">
+      <a href="/"
+        ><img src="../static/images/logo.png" alt="logo" class="logo"
+      /></a>
+      <div>
+        <a href="#" class="nav-a">About us</a>
+        <a href="#" class="nav-a">Support</a>
+      </div>
+
+      <div class="sign">
+        <div class="dropdown">
+          <div class="user drop-button">
+            <p>hello {{ current_user }}!</p>
+            <i class="zmdi zmdi-account zmdi-hc-2x"></i>
+          </div>
+          {% if current_user != "guest"%}
+          <div class="user-dropdown">
+            <a href="#"><i class="zmdi zmdi-favorite-outline"></i> My Health</a>
+            <a href="javascript:AllergiesPopup()" id="allergies-a"
+              ><i class="zmdi zmdi-alert-circle"></i> Allergies</a
+            >
+            <a href="/logout" class="log-out"
+              ><i class="zmdi zmdi-power"></i> Log Out</a
+            >
+          </div>
+          {% else %}
+        </div>
+        <a href="/login" class="log-out log">Log In</a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <div id="allergies-popup" class="popup allergies-popup">
+      <div class="popup-content-a">
+        <i
+          class="fa-solid fa-xmark fa-lg close-popup"
+          id="close-popup-allergies"
+        ></i>
+        <h2>Choose your Allergies/Restrictions</h2>
+        <h3>Nut Allergies</h3>
+        <h3>Dairy &#38 Egg Allergies</h3>
+        <h3>Grain &#38 Gluten Allergies</h3>
+        <h3>Seafood Allergies</h3>
+        <h3>Legume &#38 Seed Allergies</h3>
+        <h3>Fruit &#38 Vegetable Allergies</h3>
+        <h3>Miscellaneous Allergies</h3>
+      </div>
+    </div>
+    <div class="black_overlay" id="black-overlay"></div>
+    {% block content %}{% endblock %}
+
+    <footer class="footer"><p id="footer"></p></footer>
+    <script src="../static/footer.js"></script>
+    <script src="../static/base-popups.js"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>
