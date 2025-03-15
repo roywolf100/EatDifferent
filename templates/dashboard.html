@@ -1,0 +1,137 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %}{% block head
+%} <link rel="stylesheet" href="../static/dashboard.css" />
+<link rel="icon" type="image/x-icon" href="/static/images/favicon.png" />
+
+{% endblock %} {% block content %}
+<div class="container" id="container">
+  <div class="targets">
+    <h1>Targets</h1>
+    <div class="chart-wrapper">
+      <canvas id="chart" height="330" width="330"></canvas>
+    </div>
+
+    <div class="targets-wrapper">
+      <div class="line-text">
+        <h3>Breakfast</h3>
+        <p>134/231</p>
+      </div>
+      <div class="line-chart" id="protien-line-chart">
+        <div class="progress" id="protien-progress"></div>
+      </div>
+      <div class="line-text">
+        <h3>Lunch</h3>
+        <p>134/231</p>
+      </div>
+      <div class="line-chart" id="carbs-line-chart">
+        <div class="progress" id="carbs-progress"></div>
+      </div>
+
+      <div class="line-text">
+        <h3>Dinner</h3>
+        <p>134/231</p>
+      </div>
+      <div class="line-chart" id="fats-line-chart">
+        <div class="progress" id="fats-progress"></div>
+      </div>
+      <div class="line-text">
+        <h3>Snaks</h3>
+        <p>134/231</p>
+      </div>
+      <div class="line-chart" id="">
+        <div class="progress" id=""></div>
+      </div>
+    </div>
+  </div>
+  <div class="energy">
+    <div class="wrapper">
+      <div class="text-wrapper">
+        <h1>Energy</h1>
+        <h2 class="date"></h2>
+      </div>
+      <canvas id="energy-chart"></canvas>
+    </div>
+  </div>
+  <div class="weight">
+    <div class="wrapper">
+      <div class="text-wrapper">
+        <h1>Weight</h1>
+        <h2 class="date"></h2>
+      </div>
+      <canvas id="weight-chart"></canvas>
+    </div>
+  </div>
+  <button class="search" id="search-btn">
+    <h2>Add Food To Diary <i class="fa-solid fa-magnifying-glass"></i></h2>
+  </button>
+</div>
+
+<div id="search-popup" class="popup">
+  <div class="popup-content">
+    <i class="fa-solid fa-xmark fa-lg close-popup" id="close-popup-search"></i>
+    <div id="meals-content">
+      <h2 class="meal-label">Choose Your Meal</h2>
+      <div class="meal-wrap">
+        <input type="radio" name="meals" id="breakfast" />
+
+        <label class="meal" for="breakfast">
+          <i class="fas fa-mug-hot"></i>
+          <h3>Breakfast</h3>
+        </label>
+
+        <input type="radio" name="meals" id="lunch" />
+
+        <label class="meal" for="lunch">
+          <i class="fas fa-utensils"></i>
+          <h3>Lunch</h3>
+        </label>
+
+        <input type="radio" name="meals" id="dinner" />
+
+        <label class="meal" for="dinner">
+          <i class="fas fa-drumstick-bite"></i>
+          <h3>Dinner</h3>
+        </label>
+
+        <input type="radio" name="meals" id="snacks" />
+
+        <label class="meal" for="snacks">
+          <i class="fas fa-cookie-bite"></i>
+          <h3>Snaks</h3>
+        </label>
+      </div>
+      <button class="meals-btn" onclick="popUpChange()">Next</button>
+    </div>
+
+    <div id="search-content">
+      <h2 class="meal-label">Add Food To Diary</h2>
+
+      <div class="row">
+        <div class="search-form">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for food"
+            id="search-food"
+          />
+          <button type="submit" class="search-button">Search</button>
+        </div>
+
+        <div id="result" class="result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="black_overlay" id="black_overlay"></div>
+
+{% endblock %} {% block script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+<script
+  src="https://kit.fontawesome.com/46a97e3482.js"
+  crossorigin="anonymous"
+></script>
+<script src="../static/charts.js"></script>
+<script src="../static/search.js"></script>
+{% endblock %}
