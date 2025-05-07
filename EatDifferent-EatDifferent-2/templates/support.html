@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Support{% endblock %} {% block head
+%}
+<link rel="stylesheet" href="../static/support.css" />
+{% endblock %} {% block content %}
+<div class="content-wrap">
+  <div class="form-wrap">
+    <div>
+      <h1>Contact Us</h1>
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        onsubmit="setTimeout(() => this.reset(), 300);"
+      >
+        <input
+          type="hidden"
+          name="apikey"
+          value="0d87d538-709f-423f-88bb-951a607a5a32"
+        />
+        <input type="text" name="name" placeholder="Name:" required />
+        <input type="email" name="email" placeholder="Email:" required />
+        <textarea
+          name="message"
+          placeholder="Your message here..."
+          required
+        ></textarea>
+        <input type="submit" value="Submit" class="sumbit-btn" />
+      </form>
+    </div>
+    <img src="../static/images/mailbox.svg" alt="mailbox" class="mailbox-img"/>
+  </div>
+</div>
+{% endblock %}

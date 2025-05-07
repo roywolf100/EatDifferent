@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="../static/base-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+    />
+  </head>
+  <body>
+    <nav class="nav-info">
+      <a href="/"
+        ><img src="../static/images/logo.png" alt="logo" class="logo"
+      /></a>
+      <div>
+        <a href="/about_us" class="nav-a">About us</a>
+        <a href="/support" class="nav-a">Support</a>
+      </div>
+
+      <div class="sign">
+        <div class="dropdown">
+          <div class="user drop-button">
+            <p>hello {{ current_user }}!</p>
+            <i class="zmdi zmdi-account zmdi-hc-2x"></i>
+          </div>
+          {% if current_user != "guest"%}
+          <div class="user-dropdown">
+            {% if is_admin == True %}
+            <a href="/users" class="admin"
+              ><i class="zmdi zmdi-edit"></i> Users Control</a
+            >
+            {% endif %}
+            <a href="javascript:MyHealthPopup()"
+              ><i class="zmdi zmdi-favorite-outline"></i> My Health</a
+            >
+            <a href="/dashboard"
+              ><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a
+            >
+            <a href="/logout" class="log-out"
+              ><i class="zmdi zmdi-power"></i> Log Out</a
+            >
+            {% else %}
+          </div>
+          <a href="/login" class="log-out log">Log In</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <div id="myhealth-popup" class="popup myhealth-popup">
+      <div class="popup-content-a">
+        <i
+          class="fa-solid fa-xmark fa-lg close-popup"
+          id="close-popup-myhealth"
+        ></i>
+      </div>
+      <div class="popup-content-wrapper">
+        <div class="myhealth-container">
+          <h1>My Health</h1>
+          <h2>Change your data</h2>
+
+          <form action="#" onsubmit="changeData()">
+            <div class="data-con">
+              <div>
+                <p>Goal</p>
+                <select id="goal-data">
+                  {% if user_data %} {% for act in user_data[1] %} {% if
+                  act.selected %}
+                  <option value="{{ act.value }}" selected>
+                    {{ act.label }}
+                  </option>
+                  {% else %}
+                  <option value="{{ act.value }}">{{ act.label }}</option>
+                  {% endif %} {% endfor %} {% endif %}
+                </select>
+              </div>
+            </div>
+            <div class="data-con">
+              <div>
+                <p>Activity</p>
+                <select id="activity-data">
+                  {% if user_data %} {% for goal in user_data[2] %} {% if
+                  goal.selected %}
+                  <option value="{{ goal.value }}" selected>
+                    {{ goal.label }}
+                  </option>
+                  {% else %}
+                  <option value="{{ goal.value }}">{{ goal.label }}</option>
+                  {% endif %} {% endfor %} {% endif %}
+                </select>
+              </div>
+            </div>
+            <div class="data-con">
+              <div>
+                <p>height</p>
+                {% if user_data %}
+                <input
+                  type="number"
+                  step="any"
+                  value="{{user_data[0][2]}}"
+                  id="height-data"
+                />
+                {% endif %}
+              </div>
+            </div>
+            <div class="data-con">
+              <div>
+                <p>weight</p>
+                {% if user_data %}
+                <input
+                  type="number"
+                  step="any"
+                  value="{{user_data[0][3]}}"
+                  id="weight-data"
+                />
+                {% endif %}
+              </div>
+            </div>
+
+            <input type="submit" value="Submit Changes" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="black_overlay" id="black-overlay"></div>
+    {% block content %}{% endblock %}
+
+    <footer class="footer"><p id="footer"></p></footer>
+    <script src="../static/footer.js"></script>
+    <script src="../static/base-popups.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/46a97e3482.js"
+      crossorigin="anonymous"
+    ></script>
+
+    {% block script %}{% endblock %}
+  </body>
+</html>
